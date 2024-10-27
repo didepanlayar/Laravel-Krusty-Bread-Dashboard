@@ -1,0 +1,17 @@
+System:
+    - Microsoft Windows 10
+    - VSCode v1.94.2
+    - Docker Desktop v4.34.3 (170107)
+    - Git
+    - Firefox v127.0.1
+
+History:
+1. Create project.
+    - composer create-project --prefer-dist laravel/laravel=^8.0 Dashboard
+2. Add domain dev to the hosts file.
+3. Create database with MySQL / MariaDB.
+    - CREATE DATABASE database_name;
+    - CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
+    - GRANT ALL PRIVILEGES ON database_name.* TO 'username'@'localhost';
+    - FLUSH PRIVILEGES;
+4. Configure database to .env file.
