@@ -15,3 +15,8 @@ History:
     - GRANT ALL PRIVILEGES ON database_name.* TO 'username'@'localhost';
     - FLUSH PRIVILEGES;
 4. Configure database to .env file.
+5. User authentication scaffolding.
+    - composer require laravel/ui
+    - php artisan ui bootstrap --auth
+    - npm install && npm run dev
+    - php artisan migrate
