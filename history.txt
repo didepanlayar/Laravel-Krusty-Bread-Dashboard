@@ -20,3 +20,11 @@ History:
     - php artisan ui bootstrap --auth
     - npm install && npm run dev
     - php artisan migrate
+6. Customize users table.
+    - php artisan make:migration customize_users_table
+    - # Update ./database/migrations/customize_users_table.php
+    - php artisan migrate
+7. Administrator user seed
+    - php artisan make:seeder AdministratorSeeder
+    - # Update ./database/seeders/AdministratorSeeder
+    - php artisan db:seed --class=AdministratorSeeder
