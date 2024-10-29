@@ -24,12 +24,14 @@ History:
     - php artisan make:migration customize_users_table
     - # Update ./database/migrations/customize_users_table.php
     - php artisan migrate
-7. Administrator user seed
+7. Administrator user seed.
     - php artisan make:seeder AdministratorSeeder
     - # Update ./database/seeders/AdministratorSeeder
     - php artisan db:seed --class=AdministratorSeeder
-8. Install Skydash Template
+8. Install Skydash Template.
     - # Copy assets folder to ./public/dashboard
     - # Create global.blade.php and modify home.blade.php
     - # Modify app.blade.php, login.blade.php, email.blade.php
-9. Remove regiter page and set default view to login page.
+9. Remove regsiter page and set default view to login page.
+10. Create a symbolic link storage.
+    - php artisan storage:link
