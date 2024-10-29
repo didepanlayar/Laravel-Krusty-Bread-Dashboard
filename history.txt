@@ -28,3 +28,7 @@ History:
     - php artisan make:seeder AdministratorSeeder
     - # Update ./database/seeders/AdministratorSeeder
     - php artisan db:seed --class=AdministratorSeeder
+8. Install Skydash Template
+    - # Copy assets folder to ./public/dashboard
+    - # Create global.blade.php and modify home.blade.php
+    - # Modify app.blade.php, login.blade.php, email.blade.php
