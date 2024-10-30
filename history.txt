@@ -15,3 +15,33 @@ History:
     - GRANT ALL PRIVILEGES ON database_name.* TO 'username'@'localhost';
     - FLUSH PRIVILEGES;
 4. Configure database to .env file.
+5. User authentication scaffolding.
+    - composer require laravel/ui
+    - php artisan ui bootstrap --auth
+    - npm install && npm run dev
+    - php artisan migrate
+6. Customize users table.
+    - php artisan make:migration customize_users_table
+    - # Update ./database/migrations/customize_users_table.php
+    - php artisan migrate
+7. Administrator user seed.
+    - php artisan make:seeder AdministratorSeeder
+    - # Update ./database/seeders/AdministratorSeeder
+    - php artisan db:seed --class=AdministratorSeeder
+8. Install Skydash Template.
+    - # Copy assets folder to ./public/dashboard
+    - # Create global.blade.php and modify home.blade.php
+    - # Modify app.blade.php, login.blade.php, email.blade.php
+9. Remove regsiter page and set default view to login page.
+10. Create a symbolic link storage.
+    - php artisan storage:link
+11. CRUD Users.
+    - php artisan make:controller UserController --resource
+    - # Add user resource route to web.php
+    - # Add user menu to global.blade.php
+    - # Add user index.blade.php
+    - # Add user create.blade.php
+    - # Add user edit.blade.php
+    - # Modify UserController.php
+    - # Inject styles and scripts to global.blade.php
+    - # Configuration SweetAlert2 and Toast Notification to user index.blade.php
