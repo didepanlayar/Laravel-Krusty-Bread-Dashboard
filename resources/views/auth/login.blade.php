@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section("title") Login @endsection
+@section('title') Login @endsection
 
 @section('content')
 <div class="content-wrapper d-flex align-items-center auth px-0">

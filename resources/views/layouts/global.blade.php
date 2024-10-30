@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Krusty Bread - @yield("title")</title>
+    <title>Krusty Bread - @yield('title')</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('dashboard/assets/vendors/feather/feather.css') }}">
@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('dashboard/assets/vendors/css/vendor.bundle.base.css') }}">
     <link rel="stylesheet" href="{{ asset('dashboard/assets/vendors/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dashboard/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
+    @yield('styles')
     <link rel="stylesheet" href="{{ asset('dashboard/assets/css/style.css') }}">
     <link rel="shortcut icon" href="{{ asset('dashboard/assets/images/favicon.png') }}" />
 </head>
@@ -33,21 +34,10 @@
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                     <span class="icon-menu"></span>
                 </button>
-                <ul class="navbar-nav mr-lg-2">
-                    <li class="nav-item nav-search d-none d-lg-block">
-                        <div class="input-group">
-                            <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                                <span class="input-group-text" id="search">
-                                    <i class="icon-search"></i>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control" id="navbar-search-input" placeholder="Search now" aria-label="search" aria-describedby="search">
-                        </div>
-                    </li>
-                </ul>
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item nav-profile dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
+                        <a class="nav-link dropdown-toggle  d-flex align-items-center" href="#" data-bs-toggle="dropdown" id="profileDropdown">
+                            <h5 class="me-3">Halo, {{ Auth::user()->name }}!</h5>
                             <img src="{{ asset('dashboard/assets/images/users/user.png') }}" alt="profile" />
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
@@ -76,7 +66,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/home">
                             <i class="icon-grid menu-icon"></i>
-                            <span class="menu-title">Dashboard</span>
+                            <span class="menu-title">Beranda</span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
+                        <a class="nav-link" href="/users">
+                            <i class="icon-head menu-icon"></i>
+                            <span class="menu-title">Karyawan</span>
                         </a>
                     </li>
                 </ul>
@@ -110,6 +106,7 @@
     <script src="{{ asset('dashboard/assets/js/template.js') }}"></script>
     <script src="{{ asset('dashboard/assets/js/settings.js') }}"></script>
     <script src="{{ asset('dashboard/assets/js/todolist.js') }}"></script>
+    @yield('scripts')
 </body>
 
 </html>
