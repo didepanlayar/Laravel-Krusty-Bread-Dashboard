@@ -47,3 +47,11 @@ History:
     - # Configuration SweetAlert2 and Toast Notification to user index.blade.php
 12. Change the Create and Update User Page to the User Modal.
     - # Modify user index.blade.php, create.blade.php, edit.blade.php and UserController.php
+13. CRUD Customers.
+    - php artisan make:migration create_customers_table
+    - # Update ./database/migrations/create_customers_table.php
+    - php artisan migrate
+    - php artisan make:model Customer
+    - php artisan make:controller CustomerController --resource
+    - # Add customer resource route to web.php
+    - # Add customer menu to global.blade.php

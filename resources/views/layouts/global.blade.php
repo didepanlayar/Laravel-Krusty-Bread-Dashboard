@@ -69,8 +69,15 @@
                             <span class="menu-title">Beranda</span>
                         </a>
                     </li>
+                    <li class="nav-item {{ Request::is('customers*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('customers.index') }}">
+                            <i class="icon-star menu-icon"></i>
+                            <i class="fas fa-user-friends"></i>
+                            <span class="menu-title">Pelanggan</span>
+                        </a>
+                    </li>
                     <li class="nav-item {{ Request::is('users*') ? 'active' : '' }}">
-                        <a class="nav-link" href="/users">
+                        <a class="nav-link" href="{{ route('users.index') }}">
                             <i class="icon-head menu-icon"></i>
                             <span class="menu-title">Karyawan</span>
                         </a>
