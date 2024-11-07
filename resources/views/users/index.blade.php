@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-12 col-xl-4">
                     <div class="justify-content-end d-flex">
-                        <a href="{{ route('users.create') }}" class="btn btn-primary btn-icon-text"><i class="ti-user btn-icon-prepend"></i> Tambah Karyawan </a>
+                        <button type="button" class="btn btn-primary btn-icon-text" data-bs-toggle="modal" data-bs-target="#create-user"><i class="ti-user btn-icon-prepend"></i> Tambah Karyawan </button>
                     </div>
                 </div>
             </div>
@@ -38,6 +38,7 @@
                                 <table id="order-listing" class="table">
                                     <thead>
                                         <tr class="bg-primary text-white">
+                                            <th>No</th>
                                             <th>Nama</th>
                                             <th>Jabatan</th>
                                             <th>WhatsApp</th>
@@ -46,14 +47,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($users as $user)
+                                        @foreach ($users as $index => $user)
                                             <tr>
+                                                <td>{{ $index + 1 }}</td>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ json_decode($user->roles) }}</td>
                                                 <td>{{ $user->phone }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>
-                                                    <a href="{{ route('users.edit', [$user->id]) }}" class="btn btn-light"><i class="ti-pencil-alt text-success"></i> Ubah</a>
+                                                    <button type="button" class="btn btn-light btn-update-user" data-bs-toggle="modal" data-bs-target="#update-user" data-id="{{ $user->id }}" data-name="{{ $user->name }}" data-username="{{ $user->username }}" data-email="{{ $user->email }}" data-phone="{{ $user->phone }}"  data-roles="{{ $user->roles }}"><i class="ti-pencil-alt text-success"></i> Ubah</button>
                                                     <form action="{{ route('users.destroy', [$user->id]) }}" method="POST" class="d-inline" id="delete-form-{{ $user->id }}">
                                                         @csrf
                                                         @method('DELETE')
@@ -72,6 +74,15 @@
         </div>
     </div>
     <!-- table -->
+
+    <!-- create-user -->
+    @include('users.create')
+    <!-- create-user -->
+
+    <!-- update-user -->
+    @include('users.edit')
+    <!-- update-user -->
+
 </div>
 @endsection
 
@@ -82,6 +93,7 @@
     <script src="{{ asset('dashboard/assets/vendors/sweetalert/sweetalert.min.js') }}"></script>
     <script src="{{ asset('dashboard/assets/vendors/jquery-toast-plugin/jquery.toast.min.js') }}"></script>
     <script src="{{ asset('dashboard/assets/js/toast-utils.js') }}"></script>
+    <script src="{{ asset('dashboard/assets/js/users.js') }}"></script>
     @if(session('status'))
         <script>
             (function ($) {
@@ -101,19 +113,21 @@
         </script>
     @endif
     <script>
-        function confirmation(event, userId) {
-            event.preventDefault();
-            swal({
-                title: "Hapus data karyawan?",
-                text: "Data karyawan ini akan dihapus secara permanen!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            }).then((willDelete) => {
-                if (willDelete) {
-                    document.getElementById('delete-form-' + userId).submit();
-                }
+        $(document).ready(function() {
+            // Show create user modal
+            @if($errors->has('name') || $errors->has('username') || $errors->has('email') || $errors->has('phone') || $errors->has('roles') || $errors->has('password') || $errors->has('password_confirmation'))
+                $('#create-user').modal('show');
+            @endif
+            // Show update user modal
+            @if($errors->has('update_name') || $errors->has('update_username') || $errors->has('update_phone') || $errors->has('update_roles'))
+                $('#update-user').modal('show');
+            @endif
+            // Remove error message when modal is closed
+            // Enter the modal id with commas: '#create-user, #update-user'
+            $('#update-user').on('hidden.bs.modal', function () {
+                $(this).find('.invalid-feedback').remove();
+                $(this).find('.is-invalid').removeClass('is-invalid');
             });
-        }
+        });
     </script>
 @endsection

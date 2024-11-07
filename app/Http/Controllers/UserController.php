@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = \App\Models\User::paginate(10);
+        $users = \App\Models\User::all();
 
         return view('users.index', ['users' => $users]);
     }
@@ -25,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        // return view('users.create');
     }
 
     /**
@@ -42,7 +42,7 @@ class UserController extends Controller
             "roles"                 => "required",
             "phone"                 => "required|digits_between:10,12",
             "email"                 => "required|email|unique:users",
-            "password"              => "required",
+            "password"              => "required|min:8",
             "password_confirmation" => "required|same:password"
         ])->validate();
 
@@ -77,9 +77,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = \App\Models\User::findOrFail($id);
-
-        return view('users.edit', ['user' => $user]);
+        // 
     }
 
     /**
@@ -94,16 +92,16 @@ class UserController extends Controller
         $user           = \App\Models\User::findOrFail($id);
         
         $validator = \Validator::make($request->all(), [
-            "name"      => "required|min:5|max:100",
-            "username"  => "required|min:5|max:20|unique:users,username," . $user->id,
-            "roles"     => "required",
-            "phone"     => "required|digits_between:10,12"
+            "update_name"      => "required|min:5|max:100",
+            "update_username"  => "required|min:5|max:20|unique:users,username," . $user->id,
+            "update_roles"     => "required",
+            "update_phone"     => "required|digits_between:10,12"
         ])->validate();
 
-        $user->name     = $request->get('name');
-        $user->username = $request->get('username');
-        $user->roles    = json_encode($request->get('roles'));
-        $user->phone    = $request->get('phone');
+        $user->name     = $request->get('update_name');
+        $user->username = $request->get('update_username');
+        $user->roles    = json_encode($request->get('update_roles'));
+        $user->phone    = $request->get('update_phone');
         $user->save();
     
         return redirect()->route('users.index')->with('status', 'Karyawan berhasil diubah.');

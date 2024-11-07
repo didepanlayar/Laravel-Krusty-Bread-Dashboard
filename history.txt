@@ -45,3 +45,5 @@ History:
     - # Modify UserController.php
     - # Inject styles and scripts to global.blade.php
     - # Configuration SweetAlert2 and Toast Notification to user index.blade.php
+12. Change the Create and Update User Page to the User Modal.
+    - # Modify user index.blade.php, create.blade.php, edit.blade.php and UserController.php
