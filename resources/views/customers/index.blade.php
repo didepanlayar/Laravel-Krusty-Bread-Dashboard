@@ -1,6 +1,6 @@
 @extends('layouts.global')
 
-@section('title') Karyawan @endsection
+@section('title') Pelanggan @endsection
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('dashboard/assets/vendors/jquery-toast-plugin/jquery.toast.min.css') }}">    
@@ -14,12 +14,12 @@
         <div class="col-md-12 grid-margin">
             <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                    <h3 class="font-weight-bold">Karyawan</h3>
-                    <h6 class="font-weight-normal mb-0">Kelola semua karyawan.</h6>
+                    <h3 class="font-weight-bold">Pelanggan</h3>
+                    <h6 class="font-weight-normal mb-0">Kelola semua pelanggan.</h6>
                 </div>
                 <div class="col-12 col-xl-4">
                     <div class="justify-content-end d-flex">
-                        <button type="button" class="btn btn-primary btn-icon-text" data-bs-toggle="modal" data-bs-target="#create-user"><i class="ti-user btn-icon-prepend"></i> Tambah Karyawan </button>
+                        <button type="button" class="btn btn-primary btn-icon-text" data-bs-toggle="modal" data-bs-target="#create-customer"><i class="ti-star btn-icon-prepend"></i> Tambah Customer </button>
                     </div>
                 </div>
             </div>
@@ -40,26 +40,22 @@
                                         <tr class="bg-primary text-white">
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>Jabatan</th>
                                             <th>WhatsApp</th>
-                                            <th>Email</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($users as $index => $user)
+                                        @foreach ($customers as $index => $customer)
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
-                                                <td>{{ $user->name }}</td>
-                                                <td>{{ json_decode($user->roles) }}</td>
-                                                <td>{{ $user->phone }}</td>
-                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $customer->name }}</td>
+                                                <td>{{ $customer->phone }}</td>
                                                 <td>
-                                                    <button type="button" class="btn btn-light btn-update-user" data-bs-toggle="modal" data-bs-target="#update-user" data-id="{{ $user->id }}" data-name="{{ $user->name }}" data-username="{{ $user->username }}" data-email="{{ $user->email }}" data-phone="{{ $user->phone }}"  data-roles="{{ $user->roles }}"><i class="ti-pencil-alt text-success"></i> Ubah</button>
-                                                    <form action="{{ route('users.destroy', [$user->id]) }}" method="POST" class="d-inline" id="delete-form-{{ $user->id }}">
+                                                    <button type="button" class="btn btn-light btn-update-customer" data-bs-toggle="modal" data-bs-target="#update-customer" data-id="{{ $customer->id }}" data-name="{{ $customer->name }}" data-phone="{{ $customer->phone }}"><i class="ti-pencil-alt text-success"></i> Ubah</button>
+                                                    <form action="{{ route('customers.destroy', [$customer->id]) }}" method="POST" class="d-inline" id="delete-form-{{ $customer->id }}">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-light" onclick="confirmation(event, {{ $user->id }})"><i class="ti-trash text-danger"></i> Hapus</button>
+                                                        <button type="submit" class="btn btn-light" onclick="confirmation(event, {{ $customer->id }})"><i class="ti-trash text-danger"></i> Hapus</button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -75,13 +71,13 @@
     </div>
     <!-- table -->
 
-    <!-- create-user -->
-    @include('users.create')
-    <!-- create-user -->
+    <!-- create-customer -->
+    @include('customers.create')
+    <!-- create-customer -->
 
-    <!-- update-user -->
-    @include('users.edit')
-    <!-- update-user -->
+    <!-- update-customer -->
+    @include('customers.edit')
+    <!-- update-customer -->
 
 </div>
 @endsection
@@ -93,7 +89,7 @@
     <script src="{{ asset('dashboard/assets/vendors/sweetalert/sweetalert.min.js') }}"></script>
     <script src="{{ asset('dashboard/assets/vendors/jquery-toast-plugin/jquery.toast.min.js') }}"></script>
     <script src="{{ asset('dashboard/assets/js/toast-utils.js') }}"></script>
-    <script src="{{ asset('dashboard/assets/js/users.js') }}"></script>
+    <script src="{{ asset('dashboard/assets/js/customers.js') }}"></script>
     @if(session('status'))
         <script>
             (function ($) {
@@ -114,17 +110,17 @@
     @endif
     <script>
         $(document).ready(function() {
-            // Show create user modal
-            @if($errors->has('name') || $errors->has('username') || $errors->has('email') || $errors->has('phone') || $errors->has('roles') || $errors->has('password') || $errors->has('password_confirmation'))
-                $('#create-user').modal('show');
+            // Show create customer modal
+            @if($errors->has('name') || $errors->has('phone'))
+                $('#create-customer').modal('show');
             @endif
-            // Show update user modal
-            @if($errors->has('update_name') || $errors->has('update_username') || $errors->has('update_phone') || $errors->has('update_roles'))
-                $('#update-user').modal('show');
+            // Show update customer modal
+            @if($errors->has('update_name') || $errors->has('update_phone'))
+                $('#update-customer').modal('show');
             @endif
             // Remove error message when modal is closed
-            // Enter the modal id with commas: '#create-user, #update-user'
-            $('#update-user').on('hidden.bs.modal', function () {
+            // Enter the modal id with commas: '#create-customer, #update-customer'
+            $('#update-customer').on('hidden.bs.modal', function () {
                 $(this).find('.invalid-feedback').remove();
                 $(this).find('.is-invalid').removeClass('is-invalid');
             });

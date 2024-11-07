@@ -1,31 +1,15 @@
-@extends('layouts.global')
-
-@section('title') Tambah Karyawan @endsection
-
-@section('content')
-<div class="content-wrapper">
-    <!-- title -->
-    <div class="row">
-        <div class="col-md-12 grid-margin">
-            <div class="row">
-                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                    <h3 class="font-weight-bold">Tambah Karyawan</h3>
-                    <h6 class="font-weight-normal">Tambah karyawan untuk kelola penjualan.</h6>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- title -->
-
-    <!-- form -->
-    <div class="row">
-        <div class="col-md-6 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Form Data Karyawan</h4>
-                    <p class="card-description"> Lengkapi data karyawan. </p>
-                    <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
-                        @csrf
+    <div class="modal fade" id="create-user" tabindex="-1" role="dialog" aria-labelledby="create-user-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="create-user-label">Form Data Karyawan</h5>
+                        <button type="button" class="close" style="background: transparent;border: none;" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
                         <div class="form-group row">
                             <div class="col">
                                 <label>Nama Lengkap</label>
@@ -79,14 +63,14 @@
                             <div class="col-md-3">
                                 <div id="owner">
                                     <div class="form-check">
-                                        <label class="form-check-label"><input type="radio" class="form-check-input @error('roles') is-invalid @enderror" name="roles" id="owner" value="Owner"> Pemilik </label>
+                                        <label class="form-check-label"><input type="radio" class="form-check-input @error('roles') is-invalid @enderror" {{ old('roles') == 'Owner' ? 'checked' : '' }} name="roles" id="owner" value="Owner"> Pemilik </label>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div id="staff">
                                     <div class="form-check">
-                                        <label class="form-check-label"><input type="radio" class="form-check-input @error('roles') is-invalid @enderror" name="roles" id="staff" value="Staff"> Staf </label>
+                                        <label class="form-check-label"><input type="radio" class="form-check-input @error('roles') is-invalid @enderror" {{ old('roles') == 'Staff' ? 'checked' : '' }} name="roles" id="staff" value="Staff"> Staf </label>
                                     </div>
                                 </div>
                             </div>
@@ -120,13 +104,12 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="modal-footer">
                         <button type="submit" class="btn btn-primary me-2">Submit</button>
-                        <a href="{{ route('users.index') }}" class="btn btn-light">Cancel</a>
-                    </form>
-                </div>
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    <!-- form -->
-</div>
-@endsection
