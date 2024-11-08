@@ -55,3 +55,12 @@ History:
     - php artisan make:controller CustomerController --resource
     - # Add customer resource route to web.php
     - # Add customer menu to global.blade.php
+14. CRUD Sales Type.
+    - php artisan make:migration create_sales_type_table
+    - # Update ./database/migrations/create_sales_type_table.php
+    - php artisan migrate
+    - php artisan make:model SalesType
+    - php artisan make:controller SalesTypeController --resource
+    - # Add sales type resource route to web.php
+    - # Add sales type menu to global.blade.php
+    - # Add view for sales type

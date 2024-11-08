@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\SalesTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,6 @@ Route::resource('users', UserController::class);
 
 // Customers
 Route::resource('customers', CustomerController::class);
+
+// Sales Type
+Route::resource('sales-type', SalesTypeController::class);

@@ -69,10 +69,23 @@
                             <span class="menu-title">Beranda</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" data-bs-toggle="collapse" href="#finance" aria-expanded="false" aria-controls="finance">
+                            <i class="icon-bar-graph menu-icon"></i>
+                            <span class="menu-title">Keuangan</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="finance" style="">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item {{ Request::is('sales-type*') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('sales-type.index') }}">Jenis Penjualan</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                     <li class="nav-item {{ Request::is('customers*') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('customers.index') }}">
                             <i class="icon-star menu-icon"></i>
-                            <i class="fas fa-user-friends"></i>
                             <span class="menu-title">Pelanggan</span>
                         </a>
                     </li>
