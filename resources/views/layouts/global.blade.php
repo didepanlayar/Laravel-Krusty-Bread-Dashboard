@@ -80,6 +80,9 @@
                                 <li class="nav-item {{ Request::is('sales-type*') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('sales-type.index') }}">Jenis Penjualan</a>
                                 </li>
+                                <li class="nav-item {{ Request::is('payments*') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('payments.index') }}">Metode Pembayaran</a>
+                                </li>
                             </ul>
                         </div>
                     </li>

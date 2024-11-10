@@ -48,7 +48,7 @@
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
                                                 <td>{{ $sales->title }}</td>
-                                                <td>
+                                                <td class="text-end">
                                                     <button type="button" class="btn btn-light btn-update-sales" data-bs-toggle="modal" data-bs-target="#update-sales" data-id="{{ $sales->id }}" data-title="{{ $sales->title }}" data-commission="{{ $sales->commission }}"><i class="ti-pencil-alt text-success"></i> Ubah</button>
                                                     <form action="{{ route('sales-type.destroy', [$sales->id]) }}" method="POST" class="d-inline" id="delete-form-{{ $sales->id }}">
                                                         @csrf

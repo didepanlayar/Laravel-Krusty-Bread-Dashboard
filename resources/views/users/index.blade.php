@@ -43,7 +43,7 @@
                                             <th>Jabatan</th>
                                             <th>WhatsApp</th>
                                             <th>Email</th>
-                                            <th>Aksi</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -54,7 +54,7 @@
                                                 <td>{{ json_decode($user->roles) }}</td>
                                                 <td>{{ $user->phone }}</td>
                                                 <td>{{ $user->email }}</td>
-                                                <td>
+                                                <td class="text-end">
                                                     <button type="button" class="btn btn-light btn-update-user" data-bs-toggle="modal" data-bs-target="#update-user" data-id="{{ $user->id }}" data-name="{{ $user->name }}" data-username="{{ $user->username }}" data-email="{{ $user->email }}" data-phone="{{ $user->phone }}"  data-roles="{{ $user->roles }}"><i class="ti-pencil-alt text-success"></i> Ubah</button>
                                                     <form action="{{ route('users.destroy', [$user->id]) }}" method="POST" class="d-inline" id="delete-form-{{ $user->id }}">
                                                         @csrf
