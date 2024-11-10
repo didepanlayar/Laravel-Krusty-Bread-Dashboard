@@ -70,6 +70,20 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link collapsed" data-bs-toggle="collapse" href="#menus" aria-expanded="false" aria-controls="menus">
+                            <i class="icon-book menu-icon"></i>
+                            <span class="menu-title">Menu</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="menus" style="">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item {{ Request::is('categories*') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('categories.index') }}">Kategori</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link collapsed" data-bs-toggle="collapse" href="#finance" aria-expanded="false" aria-controls="finance">
                             <i class="icon-bar-graph menu-icon"></i>
                             <span class="menu-title">Keuangan</span>

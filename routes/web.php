@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SalesTypeController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,6 @@ Route::resource('sales-type', SalesTypeController::class);
 
 // Payments
 Route::resource('payments', PaymentController::class);
+
+// Categories
+Route::resource('categories', CategoryController::class);
