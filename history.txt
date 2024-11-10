@@ -64,3 +64,12 @@ History:
     - # Add sales type resource route to web.php
     - # Add sales type menu to global.blade.php
     - # Add view for sales type
+15. CRUD Payments
+    - php artisan make:migration create_payments_table
+    - # Update ./database/migrations/create_payments_table.php
+    - php artisan migrate
+    - php artisan make:model Payment
+    - php artisan make:controller PaymentController --resource
+    - # Add payment resource route to web.php
+    - # Add payment menu to global.blade.php
+    - # Add view for payments

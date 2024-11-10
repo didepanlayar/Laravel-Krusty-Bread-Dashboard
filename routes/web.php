@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SalesTypeController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,6 @@ Route::resource('customers', CustomerController::class);
 
 // Sales Type
 Route::resource('sales-type', SalesTypeController::class);
+
+// Payments
+Route::resource('payments', PaymentController::class);
