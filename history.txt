@@ -82,3 +82,12 @@ History:
     - # Add category resource route to web.php
     - # Add category menu to global.blade.php
     - # Add view for categories
+17. CRUD Materials.
+    - php artisan make:migration create_materials_table
+    - # Update ./database/migrations/create_materials_table.php
+    - php artisan migrate
+    - php artisan make:model Material
+    - php artisan make:controller MaterialController --resource
+    - # Add material resource route to web.php
+    - # Add material menu to global.blade.php
+    - # Add view for materials

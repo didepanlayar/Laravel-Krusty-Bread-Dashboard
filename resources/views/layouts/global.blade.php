@@ -80,6 +80,9 @@
                                 <li class="nav-item {{ Request::is('categories*') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('categories.index') }}">Kategori</a>
                                 </li>
+                                <li class="nav-item {{ Request::is('materials*') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('materials.index') }}">Stok</a>
+                                </li>
                             </ul>
                         </div>
                     </li>
