@@ -76,12 +76,13 @@ class ProductController extends Controller
 
         // Save materials
         if($request->has('materials')) {
-            foreach($request->input('materials') as $material_id => $value) {
-                $material = Material::findOrFail($material_id);
-                if($material) {
-                    $product->materials()->attach($material_id, ['quantity' => $material->stock]);
+            foreach($request->input('materials') as $material_data) {
+                $material = Material::findOrFail($material_data['id']);
+                if ($material) {
+                    $product->materials()->attach($material->id, ['quantity' => $material_data['quantity']]);
                 }
             }
+            
         }
 
         return redirect()->route('products.index')->with('status', 'Produk berhasil ditambahkan.');
@@ -165,39 +166,38 @@ class ProductController extends Controller
             }
         }
 
-
         // Update materials
         if($request->has('materials')) {
-            $new_materials = $request->input('materials');
-
-            // Current materials
+            $new_materials = collect($request->input('materials'));
+        
+            // Current materials (existing pivot data)
             $old_materials = $product->materials->keyBy('id')->map(function ($item) {
                 return $item->pivot->quantity;
             });
-
-            foreach($new_materials as $material_id => $value) {
-                // Get stock from materials
-                $material = Material::findOrFail($material_id);
-                if($material) {
-                    $quantity = $material->stock;
-                    if(isset($old_materials[$material_id])) {
-                        // Update if quantity changed
-                        if($old_materials[$material_id] != $quantity) {
-                            $product->materials()->updateExistingPivot($material_id, ['quantity' => $quantity]);
-                        }
-                        unset($old_materials[$material_id]);
-                    } else {
-                        // Add new material
-                        $product->materials()->attach($material_id, ['quantity' => $quantity]);
+        
+            // Process new materials
+            $new_materials->each(function ($value, $material_id) use ($product, &$old_materials) {
+                // If the value is array get `quantity`, otherwise use as quantity
+                $quantity = is_array($value) ? $value['quantity'] : $value;
+        
+                if(isset($old_materials[$material_id])) {
+                    // Update if quantity changed
+                    if($old_materials[$material_id] != $quantity) {
+                        $product->materials()->updateExistingPivot($material_id, ['quantity' => $quantity]);
                     }
+                    // Mark as processed
+                    unset($old_materials[$material_id]);
+                } else {
+                    // Attach new material
+                    $product->materials()->attach($material_id, ['quantity' => $quantity]);
                 }
-            }
+            });
 
-            // Remove material if input is empty
+            // Detach materials that are not in the new input
             foreach($old_materials as $material_id => $quantity) {
                 $product->materials()->detach($material_id);
             }
-        }
+        }        
 
         return redirect()->route('products.index')->with('status', 'Produk berhasil diupdate.');
     }

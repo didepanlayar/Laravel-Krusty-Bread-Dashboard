@@ -34,6 +34,7 @@
                     </ul>
                     <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" id="form-mode" value="create">
                         <div class="tab-content">
                             <!-- form-product -->
                             <div class="tab-pane fade show active" id="product" role="tabpanel" aria-labelledby="product-tab">

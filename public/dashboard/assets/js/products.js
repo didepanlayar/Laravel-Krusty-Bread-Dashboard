@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const materialId = selectedOption.value;
         const materialTitle = selectedOption.getAttribute("data-title");
-        const materialStock = selectedOption.getAttribute("data-stock");
         const materialUnit = selectedOption.getAttribute("data-unit");
 
         // Check if the material is already in the table
@@ -41,11 +40,13 @@ document.addEventListener("DOMContentLoaded", function() {
         row.id = `material-row-${materialId}`;
         row.innerHTML = `
             <td>${materialTitle}</td>
-            <td>${materialStock}</td>
+            <td>
+                <input type="number" name="materials[${materialId}][quantity]" class="form-control form-control-sm" placeholder="Masukan Jumlah" value="1" min="1" required>
+            </td>
             <td>${materialUnit}</td>
             <td>
                 <button type="button" class="btn btn-light btn-sm" onclick="removeMaterial(${materialId})"><i class="ti-trash text-danger"></i> Hapus</button>
-                <input type="hidden" name="materials[${materialId}]" value="${materialId}">
+                <input type="hidden" name="materials[${materialId}][id]" value="${materialId}">
             </td>
         `;
 

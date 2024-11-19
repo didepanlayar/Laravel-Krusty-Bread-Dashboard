@@ -35,6 +35,7 @@
                     <form method="POST" action="{{ route('products.update', $product->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
+                        <input type="hidden" id="form-mode" value="update">
                         <div class="tab-content">
                             <!-- form-product -->
                             <div class="tab-pane fade show active" id="product" role="tabpanel" aria-labelledby="product-tab">
@@ -153,11 +154,13 @@
                                             @foreach($product->materials as $material)
                                                 <tr id="material-row-{{ $material->id }}">
                                                     <td>{{ $material->title }}</td>
-                                                    <td>{{ $material->stock }}</td>
+                                                    <td>
+                                                        <input type="number" name="materials[{{ $material->id }}][quantity]" class="form-control form-control-sm" placeholder="Masukan Jumlah" value="{{ $material->pivot->quantity }}" min="1" required>
+                                                    </td>
                                                     <td>{{ $material->unit }}</td>
                                                     <td>
                                                         <button type="button" class="btn btn-light btn-sm" onclick="removeMaterial({{ $material->id }})"><i class="ti-trash text-danger"></i> Hapus</button>
-                                                        <input type="hidden" name="materials[{{ $material->id }}]" value="{{ $material->id }}">
+                                                        <input type="hidden" name="materials[{{ $material->id }}][id]" value="{{ $material->id }}">
                                                     </td>
                                                 </tr>
                                             @endforeach
