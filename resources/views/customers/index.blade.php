@@ -41,7 +41,7 @@
                                             <th>No</th>
                                             <th>Nama</th>
                                             <th>WhatsApp</th>
-                                            <th>Aksi</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -50,7 +50,7 @@
                                                 <td>{{ $index + 1 }}</td>
                                                 <td>{{ $customer->name }}</td>
                                                 <td>{{ $customer->phone }}</td>
-                                                <td>
+                                                <td class="text-end">
                                                     <button type="button" class="btn btn-light btn-update-customer" data-bs-toggle="modal" data-bs-target="#update-customer" data-id="{{ $customer->id }}" data-name="{{ $customer->name }}" data-phone="{{ $customer->phone }}"><i class="ti-pencil-alt text-success"></i> Ubah</button>
                                                     <form action="{{ route('customers.destroy', [$customer->id]) }}" method="POST" class="d-inline" id="delete-form-{{ $customer->id }}">
                                                         @csrf

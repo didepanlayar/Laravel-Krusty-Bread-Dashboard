@@ -69,10 +69,46 @@
                             <span class="menu-title">Beranda</span>
                         </a>
                     </li>
+                    <li class="nav-item {{ in_array(Request::segment(1), ['products', 'categories', 'materials']) ? 'active' : '' }}">
+                        <a class="nav-link collapsed" data-bs-toggle="collapse" href="#menus" aria-expanded="{{ in_array(Request::segment(1), ['products', 'categories', 'materials']) ? 'true' : 'false' }}" aria-controls="menus">
+                            <i class="icon-book menu-icon"></i>
+                            <span class="menu-title">Menu</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse {{ in_array(Request::segment(1), ['products', 'categories', 'materials']) ? 'show' : '' }}" id="menus" style="">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::is('products*') ? 'active' : '' }}" href="{{ route('products.index') }}">Produk</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::is('categories*') ? 'active' : '' }}" href="{{ route('categories.index') }}">Kategori</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::is('materials*') ? 'active' : '' }}" href="{{ route('materials.index') }}">Stok</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" data-bs-toggle="collapse" href="#finance" aria-expanded="false" aria-controls="finance">
+                            <i class="icon-bar-graph menu-icon"></i>
+                            <span class="menu-title">Keuangan</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="finance" style="">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item {{ Request::is('sales-type*') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('sales-type.index') }}">Jenis Penjualan</a>
+                                </li>
+                                <li class="nav-item {{ Request::is('payments*') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('payments.index') }}">Metode Pembayaran</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                     <li class="nav-item {{ Request::is('customers*') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('customers.index') }}">
                             <i class="icon-star menu-icon"></i>
-                            <i class="fas fa-user-friends"></i>
                             <span class="menu-title">Pelanggan</span>
                         </a>
                     </li>
