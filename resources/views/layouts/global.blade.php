@@ -69,19 +69,22 @@
                             <span class="menu-title">Beranda</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link collapsed" data-bs-toggle="collapse" href="#menus" aria-expanded="false" aria-controls="menus">
+                    <li class="nav-item {{ in_array(Request::segment(1), ['products', 'categories', 'materials']) ? 'active' : '' }}">
+                        <a class="nav-link collapsed" data-bs-toggle="collapse" href="#menus" aria-expanded="{{ in_array(Request::segment(1), ['products', 'categories', 'materials']) ? 'true' : 'false' }}" aria-controls="menus">
                             <i class="icon-book menu-icon"></i>
                             <span class="menu-title">Menu</span>
                             <i class="menu-arrow"></i>
                         </a>
-                        <div class="collapse" id="menus" style="">
+                        <div class="collapse {{ in_array(Request::segment(1), ['products', 'categories', 'materials']) ? 'show' : '' }}" id="menus" style="">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item {{ Request::is('categories*') ? 'active' : '' }}">
-                                    <a class="nav-link" href="{{ route('categories.index') }}">Kategori</a>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::is('products*') ? 'active' : '' }}" href="{{ route('products.index') }}">Produk</a>
                                 </li>
-                                <li class="nav-item {{ Request::is('materials*') ? 'active' : '' }}">
-                                    <a class="nav-link" href="{{ route('materials.index') }}">Stok</a>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::is('categories*') ? 'active' : '' }}" href="{{ route('categories.index') }}">Kategori</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::is('materials*') ? 'active' : '' }}" href="{{ route('materials.index') }}">Stok</a>
                                 </li>
                             </ul>
                         </div>

@@ -12292,12 +12292,11 @@ textarea.is-invalid.tt-hint, .select2-container--default .select2-selection--sin
 .nav-underline {
   --bs-nav-underline-gap: 1rem;
   --bs-nav-underline-border-width: 0.125rem;
-  --bs-nav-underline-link-active-color: var(--bs-emphasis-color);
+  --bs-nav-underline-link-active-color: var(--bs-primary);
   gap: var(--bs-nav-underline-gap);
 }
 .nav-underline .nav-link {
-  padding-right: 0;
-  padding-left: 0;
+  font-size: medium;
   border-bottom: var(--bs-nav-underline-border-width) solid transparent;
 }
 .nav-underline .nav-link:hover, .nav-underline .nav-link:focus {
@@ -12328,11 +12327,30 @@ textarea.is-invalid.tt-hint, .select2-container--default .select2-selection--sin
   width: 100%;
 }
 
+.nav-tab {
+  color: #1a1a1a;
+}
+
+.nav-tab:hover {
+  color: #010101;
+}
+
+.tab-content {
+  padding: 2rem 1rem;
+  text-align: justify;
+}
+
 .tab-content > .tab-pane {
   display: none;
 }
+
 .tab-content > .active {
   display: block;
+}
+
+.tab-content .form-select {
+  font-size: 0.8rem;
+  color: #010101;
 }
 
 .navbar {

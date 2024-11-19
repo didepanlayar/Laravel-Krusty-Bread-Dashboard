@@ -7,6 +7,7 @@ use App\Http\Controllers\SalesTypeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,3 +50,6 @@ Route::resource('categories', CategoryController::class);
 
 // Materials
 Route::resource('materials', MaterialController::class);
+
+// Products
+Route::resource('products', ProductController::class);

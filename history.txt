@@ -91,3 +91,24 @@ History:
     - # Add material resource route to web.php
     - # Add material menu to global.blade.php
     - # Add view for materials
+18. CRUD Products.
+    - php artisan make:migration create_products_table
+    - php artisan make:migration create_prices_table
+    - php artisan make:migration create_product_materials_table
+    - # Update ./database/migrations/create_products_table.php
+    - # Update ./database/migrations/create_prices_table.php
+    - # Update ./database/migrations/create_product_materials_table.php
+    - php artisan migrate
+    - php artisan make:model Product
+    - php artisan make:model Price
+    - php artisan make:model ProductMaterial
+    - # Update ./app/Models/Product.php
+    - # Update ./app/Models/Price.php
+    - # Update ./app/Models/ProductMaterial.php
+    - php artisan make:controller ProductController --resource
+    - # Add product resource route to web.php
+    - # Add product menu to global.blade.php
+    - # Add product index.blade.php
+    - # Add product create.blade.php
+    - # Add product edit.blade.php
+    - # Update style.css
